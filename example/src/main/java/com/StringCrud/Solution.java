@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Solution {
 	public static Map<Integer, String> properties = new HashMap<>();
-	static String name = "C:\\Users\\vavil\\git\\StringCRUD\\example\\file.properties";//честно пытался не харкодить тут(нет)
+	static String name = "C:\\Users\\vavil\\git\\example\\file.properties";//честно пытался не харкодить тут(нет)
 
 	public static void save() throws Exception {
 		FileOutputStream fileOutputStream = new FileOutputStream(name);

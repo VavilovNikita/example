@@ -41,32 +41,33 @@ public class StringCRUD extends StringDB {
 			}
 		}
 
-		if ("create".equals(comand)) {
-			if (insert(value)) {
-				return ("String " + value + " created");
-				}else {
+		switch (comand) {
+			case "create":
+				if (insert(value)) {
+					return ("String " + value + " created");
+				} else {
 					return ("String " + value + " invalid");
 				}
-			
 
-		} else if ("get".equals(comand)) {
-			return (get(id));
-		} else if ("delite".equals(comand)) {
-			if (remove(id)) {
-				return ("String " + value + " delited");
-			} else {
-				return ("String by index " + id + " not found");
-			}
-		} else if ("update".equals(comand)) {
-			if (update(value, id)) {
-				return ("String with id = " + id + " updated");
-			}else {
-				return ("String with id = " + id + " not found");
-			}
-		} else if ("quit".equals(comand)) {
-			return ("quit");
-		} else {
-			return "Unexpected value: " + comand;
+
+			case "get":
+				return (get(id));
+			case "delite":
+				if (remove(id)) {
+					return ("String " + value + " delited");
+				} else {
+					return ("String by index " + id + " not found");
+				}
+			case "update":
+				if (update(value, id)) {
+					return ("String with id = " + id + " updated");
+				} else {
+					return ("String with id = " + id + " not found");
+				}
+			case "quit":
+				return ("quit");
+			default:
+				return "Unexpected value: " + comand;
 		}
 	}
 
