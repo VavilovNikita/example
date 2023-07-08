@@ -9,107 +9,102 @@ public class TestMain {
 
 	@Test
 	public void checkempty() {
-		StringCRUD.testRequest = "Create  ";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "Create  ".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String  invalid";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
 	@Test
 	public void CheckSingleSpaceInput() {
-		StringCRUD.testRequest = "CREATE Hello";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "CREATE Hello".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String Hello created";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
 	@Test
 	public void CheckSerevalSpaceInput() {
-		StringCRUD.testRequest = "CREATE                  ";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "CREATE                  ".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String  invalid";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
 	@Test
 	public void CheckSingleCharacterInput() {
-		StringCRUD.testRequest = "CREATE c";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "CREATE c".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String c created";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
 	@Test
 	public void CheckMultipleSameLetterInput() {
-		StringCRUD.testRequest = "CREATE ssssssssssssssssssssss";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "CREATE ssssssssssssssssssssss".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String ssssssssssssssssssssss created";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
 	@Test
 	public void CheckTheSameCharacterInLowerAndUpperCasesMixedInTheInput() {
-		StringCRUD.testRequest = "CREATE sSsssSssSssSssSssSss";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "CREATE sSsssSssSssSssSssSss".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String sSsssSssSssSssSssSss created";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
 	@Test
 	public void CheckWordWithDifferentLetters() {
-		StringCRUD.testRequest = "CREATE Hello world!";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "CREATE Hello world!".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String Hello created";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
 	@Test
 	public void CheckOnlySymbols() {
-		StringCRUD.testRequest = "CREATE qqqqqqqq q q q q qq qq q ";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "CREATE qqqqqqqq q q q q qq qq q ".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String qqqqqqqq created";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
 	@Test
 	public void checkSeveralWords() {
-		StringCRUD.testRequest = "CREATE Hello how are you?";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "CREATE Hello how are you?".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String Hello created";
 		assertEquals(expectedProduct, actualProduct);
 	}
 
-	@Test(expected = NullPointerException.class)
-	public void CheckNull() {
-		StringCRUD.testRequest = null;
-		String actualProduct = crud.doStart();
-	}
 	@Test
 	public void getByIndex() {
-		StringCRUD.testRequest = "GET 5";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "GET 5".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "5-world!";
 		assertEquals(expectedProduct, actualProduct);
 	}
 	@Test
 	public void get() {
-		StringCRUD.testRequest = "GET";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "GET".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = " 0-hello 1-my 2-dear 3-friend! 4-qqqqqqqq 5-world! 6-ssssssssssssssssssssss 7-Hello 8-sSsssSssSssSssSssSss";
 		assertEquals(expectedProduct, actualProduct);
 	}
 	@Test
 	public void updateByIndex() {
-		StringCRUD.testRequest = "UPDATE 5 world!";
-		String actualProduct = crud.doStart();
+		StringCRUD.str = "UPDATE 5 world!".split(" ");
+		String actualProduct = crud.getAnswer();
 		String expectedProduct = "String with id = 5 updated";
 		assertEquals(expectedProduct, actualProduct);
 	}
 	@Test
-	public void delite() {
-		StringCRUD.testRequest = "DELITE 5";
-		String actualProduct = crud.doStart();
-		String expectedProduct = "String  delited";
+	public void delete() {
+		StringCRUD.str = "DELETE 5".split(" ");
+		String actualProduct = crud.getAnswer();
+		String expectedProduct = "String  deleted";
 		assertEquals(expectedProduct, actualProduct);
 	}
 }

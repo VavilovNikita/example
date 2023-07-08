@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution {
+public class SaveLoad {
 	public static Map<Integer, String> properties = new HashMap<>();
 	static String name = "C:\\Users\\vavil\\git\\example\\file.properties";//честно пытался не харкодить тут(нет)
 
@@ -23,23 +23,23 @@ public class Solution {
 
 	public static Map<Integer, String> getProperties() {
 		try {
-			load();
+			return load();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
-			return properties;
+		return null;
 	}
 
 	public static void setProperties(Map<Integer, String> properties){
-		Solution.properties = properties;
+		SaveLoad.properties = properties;
 		try {
 			save();
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 
-	public static void load() throws Exception {
+	public static Map load() throws Exception {
 		FileInputStream fileInputStream = new FileInputStream(name);
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
 		while (bufferedReader.ready()) {
@@ -47,5 +47,6 @@ public class Solution {
 			properties.put(Integer.parseInt(s[0]), s[1]);
 		}
 		bufferedReader.close();
+		return properties;
 	}
 }

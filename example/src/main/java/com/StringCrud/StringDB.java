@@ -1,15 +1,18 @@
 package com.StringCrud;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 abstract class StringDB {
-	private int count = 0;
+
+	private final AtomicInteger count = new AtomicInteger(0);
 	protected Map<Integer, String> map;
 
 	{
 		try {
-			map = Solution.getProperties();//получение строк из файла
-			count = map.size();
+			map = SaveLoad.getProperties();//получение строк из файла
+			assert map != null;
+			count.getAndSet(map.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -18,7 +21,7 @@ abstract class StringDB {
 	protected boolean insert(String val) {
 		if("".equals(val))
 			return false;
-		map.put(count++, val);
+		map.put(count.getAndIncrement(), val);
 		return true;
 	}
 
@@ -35,8 +38,8 @@ abstract class StringDB {
 		if (!map.containsKey(id)) {
 			return false;
 		} else {
-			count--;
-			for (int i = id; i < count; i++) {
+			count.getAndDecrement();
+			for (int i = id; i < count.get(); i++) {
 				map.put(i, map.get(i + 1));
 			}
 		}
@@ -47,10 +50,10 @@ abstract class StringDB {
 		if (id >= 0) {
 			return id + "-" + map.get(id);
 		}
-		String rasault = "";
-		for (int i = 0; i < count; i++) {
-			rasault += " " + i + "-" + map.get(i);
+		StringBuilder rasault = new StringBuilder();
+		for (int i = 0; i < count.get(); i++) {
+			rasault.append(" ").append(i).append("-").append(map.get(i));
 		}
-		return rasault;
+		return rasault.toString();
 	}
 }
